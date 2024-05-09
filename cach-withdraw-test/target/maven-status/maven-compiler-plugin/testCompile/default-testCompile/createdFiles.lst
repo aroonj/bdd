@@ -1,6 +1,0 @@
-com\example\RunCucumberExampleTest.class
-com\example\cachwithdraw\RunCucumberCachTransferTest.class
-com\example\cachwithdraw\RunCucumberCachWithdrawTest.class
-com\example\cachwithdraw\Actionwords.class
-com\example\StepDefinitions.class
-com\example\cachwithdraw\StepDefinitions.class
