@@ -6,8 +6,6 @@
 
 ## แนวคิด
 
-### features files
-
 1. หนึ่งไฟล์ หนึ่ง feature ซึ่งอาจมีหลาย Scenario
 1. วาง features file ไว้ใน resources จะเป็น `src\test\resources` หรือ `src\main\resources` ก็ได้
 1. ควรแบ่งเป็น subdirectory เพื่อให้ง่ายต่อการแบ่งงาน
