@@ -14,7 +14,7 @@
    * `test class` ซึ่งเป็น `junit version 5` สามารถทำงานร่วมกับ junit และ maven ได้เป็นอย่างดี
      
 
-ตัวอย่าง Feature file เขียนด้วยภาษา `Gherkin`
+ตัวอย่าง Feature โอนเงิน เขียนด้วยภาษา `Gherkin`
 
 ``` Gherkin
 
@@ -35,6 +35,50 @@ Feature: Account Holder transfers cash
     And the card should be returned
 
 ```
+
+ตัวอย่าง Feature ถอนเงิน เขียนด้วยภาษา `Gherkin`
+
+``` Gherkin
+Feature: Account Holder withdraws cash
+    "**In order to** get money when the bank is closed"
+    "**As** an Account Holder"
+    "**I want to** withdraw cash from an ATM"
+
+  @Priority-high
+  Scenario Outline: Account has sufficient funds
+    Given the account balance is "$100"
+    And the machine contains enough money
+    And the card is valid
+    When the Account Holder requests "<amount>"
+    Then the ATM should dispense "<amount>"
+    And the account balance should be "<ending_balance>"
+    And the card should be returned
+
+    Examples:
+      | ending_balance | amount |
+      | $0 | $100 |
+      | $50 | $50 |
+      | $80 | $20 |
+
+  @Priority-high
+  Scenario: Account has insufficient funds
+    Given the account balance is "$10"
+    And the card is valid
+    And the machine contains enough money
+    When the Account Holder requests "$20"
+    Then the ATM should not dispense any money
+    And the ATM should say there are insufficient funds
+
+  @Priority-high
+  Scenario: Card has been disabled
+    Given the card is disabled
+    When the Account Holder requests "$10"
+    Then the ATM should retain the card
+    And the ATM should say the card has been retained
+
+
+```
+
 
 ตัวอย่าง step class
 
@@ -156,4 +200,42 @@ test Cach Transfer:
 
 ``` shell  
 mvn clean test -Dtest="com.example.cachwithdraw.RunCucumberCachTransferTest"
+```
+
+## Run Test with filter
+
+``` shell
+mvn clean test -D"cucumber.filter.tags=@Priority-medium" -Dtest="com.example.cachwithdraw.RunCucumberCachWithdrawTest"
+
+```
+
+`Warning` test class ที่กำหนด `cucumber.features` ไว้ใน class แล้วจะไม่สามารถ filter ด้วย CLI ได้
+
+
+``` shell
+
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+May 10, 2024 1:25:46 PM io.cucumber.junit.platform.engine.DiscoverySelectorResolver warnWhenCucumberFeaturesPropertyIsUsed
+WARNING: Discovering tests using the cucumber.features property. Other discovery selectors are ignored!
+
+This is a work around for the limited JUnit 5 support in Maven and Gradle. Please request/upvote/sponsor/ect better support for JUnit 5 discovery selectors. For details see: https://github.com/cucumber/cucumber-jvm/pull/2498
+
+If you are using the JUnit 5 Suite Engine, Platform Launcher API or Console Launcher you should not use this property. Please consult the JUnit 5 documentation on test selection.    
+[INFO] Running com.example.cachwithdraw.RunCucumberCachWithdrawTest
+[INFO] Running io.cucumber.junit.platform.engine.CucumberTestEngine
+[WARNING] Tests run: 5, Failures: 0, Errors: 0, Skipped: 5, Time elapsed: 0.457 s -- in io.cucumber.junit.platform.engine.CucumberTestEngine
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.837 s -- in com.example.cachwithdraw.RunCucumberCachWithdrawTest
+[INFO]
+[INFO] Results:
+[INFO]
+[WARNING] Tests run: 5, Failures: 0, Errors: 0, Skipped: 5
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.568 s
+[INFO] Finished at: 2024-05-10T13:25:47+07:00
+[INFO] ------------------------------------------------------------------------
 ```
