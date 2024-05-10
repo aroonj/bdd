@@ -15,9 +15,4 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @ConfigurationParameter(key=GLUE_PROPERTY_NAME,value="com.example.login")
 public class LoginTest {
 
-
-    void init(){
-        System.out.println("Initial test");
-
-    }
 }

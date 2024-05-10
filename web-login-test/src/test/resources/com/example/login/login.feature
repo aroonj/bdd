@@ -30,12 +30,12 @@ Feature: User Login
       | username | <username> |
       | password | <password> |
     And I click the login button
-    Then I should see the appropriate result
+    Then I should see the appropriate <result>
 
     Examples:
       | username | password  | result            |
       | admin    | admin123  | Successful Login  |
-      | user1    | pass1     | Successful Login  |
+      | user1    | pass1     | Failed Login  |
       | invalidUser | invalidPass | Failed Login |
       |          | admin123  | Failed Login      |
       | admin    |           | Failed Login      |
