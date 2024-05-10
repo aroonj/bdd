@@ -82,3 +82,31 @@ test Login Fail:
 ``` shell  
 mvn clean test -D"cucumber.filter.tags=@Login-fail"
 ```
+
+## GenAI Prompt
+
+``` text
+create user story in Gherkin language for User Login and test scenario step start with goto URL "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" follow by user input username and password when their click login button if verify credential success then goto landing URL if not goto login URL again
+```
+
+``` text
+generate action step in java code from the given Gherkin above
+```
+
+``` text
+list necessary maven dependency should include to this project
+```
+
+``` text
+insert code for close the WebDriver after test scenario
+```
+
+``` text
+how to config WebDriver wait before load all elements completed
+```
+
+### Summarize
+
+``` text
+What are difference meaning and action of keyword Given, When, And, and Then in Gherkin language. How does java testing framework execution each cucumber annotation
+```
