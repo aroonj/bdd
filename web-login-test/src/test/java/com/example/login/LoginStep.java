@@ -28,7 +28,14 @@ public class LoginStep {
 
     @Before
     public void init(Scenario scenario) {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Aroon Janthong\\Workspaces\\bdd\\WebDriver\\chromedriver-win64\\chromedriver.exe");
+
+        final String key="webdriver.chrome.driver";
+        final String webDriver=System.getProperty(key);
+        if(Objects.isNull(webDriver) || webDriver.isBlank()){
+            System.err.printf("set the web driver with -D%s=<WEBDRIVE_CHROME_DEIVER>",key);
+        }
+        System.out.printf("System property: webdriver.chrome.driver=%s \n", webDriver);
+        
         driver = new ChromeDriver();
 
     }

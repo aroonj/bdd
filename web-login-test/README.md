@@ -65,22 +65,26 @@ Feature: User Login
 
 ## Run test
 
+[Download Selenium WebDriver](https://www.selenium.dev/downloads/) และติดตั้งในเครื่องตาม directory ที่ต้องการ เรียกว่า `$WEBDRIVE_CHROME_DEIVER` โดย `$WEBDRIVE_CHROME_DEIVER` ใช้แทน path เต็มของ WebDriver
+เช่น `C:\Users\YOUR_HOME\Workspaces\bdd\WebDriver\chromedriver-win64\chromedriver.exe`
+
 test all:
 
 ``` shell
-mvn clean test 
+
+mvn -D"webdriver.chrome.driver"=$WEBDRIVE_CHROME_DEIVER clean test
 ```
 
 test Login Success:
 
 ``` shell  
-mvn clean test -D"cucumber.filter.tags=@Login-normal"
+mvn clean test -D"cucumber.filter.tags=@Login-normal" -D"webdriver.chrome.driver"=$WEBDRIVE_CHROME_DEIVER
 ```
 
 test Login Fail:
 
 ``` shell  
-mvn clean test -D"cucumber.filter.tags=@Login-fail"
+mvn clean test -D"cucumber.filter.tags=@Login-fail" -D"webdriver.chrome.driver"=$WEBDRIVE_CHROME_DEIVER
 ```
 
 ## GenAI Prompt

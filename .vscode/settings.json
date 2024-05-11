@@ -1,3 +1,6 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "terminal.integrated.env.windows": {
+        "GRAALVM_HOME": "C:\\Program Files\\graalvm-jdk-22+36.1"
+    }
 }
